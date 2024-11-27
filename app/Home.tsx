@@ -8,8 +8,9 @@ import {
   Dimensions,
 } from "react-native";
 import Header from "./components/Header";
-import App from "./components/Navegação";
+// import App from "./components/Navegação";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { router, useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -72,6 +73,7 @@ export default function Home() {
               </Text>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: "#EBC57A" }]}
+                onPress={() => router.push('/Processos')}
               >
                 <Ionicons name="add" size={20} color="#FFF" />
               </TouchableOpacity>
@@ -168,7 +170,7 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
-      <App/>
+      {/* <App/> */}
     </>
   );
 }

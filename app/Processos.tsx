@@ -1,58 +1,35 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
 import { Search } from "../app/components/Search";
+import Header from "./components/Header";
+
 
 export default function Processos() {
   return (
+    
+    <>
+    < Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil"/>
+    <ScrollView
+    showsVerticalScrollIndicator={false}
+    > 
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#26A076", "#176438"]}
-        style={styles.headerGradient}
-      >
-        <View style={styles.row1}>
-          <Image
-            style={styles.imgProfile}
-            source={{
-              uri: "https://th.bing.com/th/id/R.902fb01972a7d62c03d6bf23c5b16dae?rik=BednsWHWMl1r5g&pid=ImgRaw&r=0",
-            }}
-          />
-
-          <Ionicons name="notifications" size={24} color="white" />
-        </View>
-
-        <View style={styles.textContainer}>
-          <Text style={{ color: "white", fontSize: 24 }}>Olá, Everalda</Text>
-          <Text style={{ color: "white", fontSize: 14 }}>
-            Bem-vindo ao DP PE.
-          </Text>
-
-          <View style={styles.locationContainer}>
-            <Feather name="map-pin" size={14} color="white" />
-            <Text style={styles.locationText}>
-              Jaboatão, Pernambuco - Brasil
-            </Text>
-          </View>
-        </View>
-
-        <Search />
-      </LinearGradient>
-
-      <Text style={[styles.infoText, { marginLeft: -170 }]}>
+      
+      <Text style={[styles.infoText]}>
         Seus Processos
       </Text>
 
       <View style={styles.cardsContainer}>
         <View style={styles.miniCard1}>
-          <Text style={{ color: "#26A076", fontSize: 11 }}>Finalizado</Text>
+          <Text style={{ color: "#26A076", fontSize: 15 }}>Finalizado</Text>
         </View>
         <View style={styles.miniCard2}>
-          <Text style={{ color: "#EC7C7C", fontSize: 11 }}>Pendente</Text>
+          <Text style={{ color: "#EC7C7C", fontSize: 15 }}>Pendente</Text>
         </View>
         <View style={styles.miniCard3}>
-          <Text style={{ color: "#D7B508", fontSize: 11 }}>Em andamento</Text>
+          <Text style={{ color: "#D7B508", fontSize: 14 }}>Em andamento</Text>
         </View>
       </View>
 
@@ -89,6 +66,22 @@ export default function Processos() {
       </View>
 
       <View style={styles.card}>
+        <Text style={styles.cardTitle}>Revisão de Pensão Alimentícia</Text>
+        <Text style={styles.cardDescription}>
+          Pedido para revisão do valor da{"\n"}pensão já exigida.
+        </Text>
+        <View style={styles.cardDatesContainer}>
+          <Text style={styles.cardDates}>
+            Inicio do processo: 02/10/2024{"\n"}Fim do processo:
+          </Text>
+
+          <View style={styles.statusCard2}>
+            <Text style={styles.statusText2}>Em andamento</Text>
+          </View>
+        </View>
+      </View>
+
+      <View style={styles.card}>
         <Text style={styles.cardTitle}>Ação Civil Pública</Text>
         <Text style={styles.cardDescription}>
           Proteção dos direitos coletivos{"\n"}ou difusos, como direitos do
@@ -104,7 +97,11 @@ export default function Processos() {
           </View>
         </View>
       </View>
+      
     </View>
+    </ScrollView>
+    
+    </>
   );
 }
 
@@ -156,56 +153,73 @@ const styles = StyleSheet.create({
   },
   infoText: {
     color: "#000000",
-    fontSize: 20,
-    marginVertical: 0,
-    marginBottom: 5,
+    fontSize: 25,
+    fontWeight: "bold",
+    // marginVertical: 0,
+    marginBottom: 30,
+    marginLeft: 15
   },
 
   cardsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "80%",
-    marginBottom: 10,
+    marginBottom: 25,
   },
   miniCard1: {
     backgroundColor: "#DCEDE4",
     width: 92,
-    height: 20,
+    height: 25,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 4, // Para Android
   },
   miniCard2: {
     backgroundColor: "#F9C0C0",
     width: 92,
-    height: 20,
+    height: 25,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 4, // Para Android
   },
   miniCard3: {
     backgroundColor: "#F9E3A1",
-    width: 92,
-    height: 20,
+    width: 100,
+    height: 25,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 4, // Para Android
   },
   card: {
     backgroundColor: "#F5F5F5",
-    width: "82%",
+    width: "90%",
     padding: 15,
     borderRadius: 20,
     marginBottom: 20,
   },
   cardTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "bold",
     color: "#000000",
     marginBottom: 1,
   },
   cardDescription: {
-    fontSize: 12,
+    fontSize: 13,
     color: "#000000",
     marginBottom: 2,
   },
@@ -216,14 +230,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cardDates: {
-    fontSize: 12,
+    fontSize: 13,
     color: "#176438",
   },
 
   statusCard1: {
     backgroundColor: "#DCEDE4",
     width: 72,
-    height: 16,
+    height: 20,
     borderRadius: 11,
     justifyContent: "center",
     alignItems: "center",
@@ -234,7 +248,7 @@ const styles = StyleSheet.create({
   statusCard2: {
     backgroundColor: "#F9E3A1",
     width: 88,
-    height: 16,
+    height: 20,
     borderRadius: 11,
     justifyContent: "center",
     alignItems: "center",
@@ -244,8 +258,8 @@ const styles = StyleSheet.create({
   },
   statusCard3: {
     backgroundColor: "#F9C0C0",
-    width: 55,
-    height: 15,
+    width: 72,
+    height: 20,
     borderRadius: 11,
     justifyContent: "center",
     alignItems: "center",

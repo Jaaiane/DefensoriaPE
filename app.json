@@ -4,8 +4,9 @@
     "slug": "DefensoriaPE",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "myapp",
+    "scheme": "DefensoriaPE",
     "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
