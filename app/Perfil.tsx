@@ -2,19 +2,23 @@ import React from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter, router } from "expo-router";
 
 export default function Perfil() {
+
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={["#26A076", "#176438"]}
         style={styles.headerGradient}
       >
-        {/* Ícone de seta para voltar */}
+       
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => {
-            /* Aqui você pode implementar a ação de voltar */
+            router.push('/Home')
           }}
         >
           <Ionicons name="arrow-back-outline" size={25} color="#fff" />
@@ -32,16 +36,20 @@ export default function Perfil() {
             <Text style={styles.email}>everaldasilveira@gmail.com</Text>
           </View>
         </View>
-      </LinearGradient>
+      </LinearGradient> */}
 
       <View style={styles.menuContainer}>
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity 
+        style={styles.menuItem}
+        onPress={() => router.push("/MeusDados")}>
           <Ionicons name="person-outline" size={24} color="#000000" />
-          <Text style={styles.menuText}>Meus dados</Text>
+          <Text style={styles.menuText}>Meus Dados</Text>
         </TouchableOpacity>
         <View style={styles.separator}></View>
 
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity 
+        style={styles.menuItem}
+        onPress={() => router.push("/Configuracao")}>
           <Ionicons name="settings-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Configurações</Text>
         </TouchableOpacity>
@@ -66,7 +74,7 @@ export default function Perfil() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2",
+    // backgroundColor: "#f2f2",
   },
   headerGradient: {
     width: "100%",
@@ -86,8 +94,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
+    // alignItems: "center",
+    // paddingHorizontal: 100,
   },
   imgProfile: {
     width: 110,
@@ -95,26 +103,28 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     borderWidth: 3,
     borderColor: "#fff",
-    marginRight: 30,
-    marginTop: 100,
+    marginRight: 50,
+    marginTop: 90,
   },
   textContainer: {
     justifyContent: "center",
   },
   name: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#fff",
-    marginEnd: 30,
-    marginBottom: 0,
+    // marginEnd: 20,
+    // marginBottom: 0,
     marginTop: 50,
+    
   },
   email: {
-    fontSize: 14,
+    fontSize: 17,
     color: "#fff",
+    textAlign: 'center'
   },
   menuContainer: {
-    padding: 40,
+    padding: 35,
     marginTop: 40,
   },
   menuItem: {
@@ -129,6 +139,6 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: "#333",
+    backgroundColor: "#D9D9D9",
   },
 });

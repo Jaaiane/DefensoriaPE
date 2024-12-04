@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
-import { Search } from "./Search";
 
 interface HeaderProps {
   userName: string;
@@ -13,32 +12,28 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ userName, location }) => {
   return (
     <>
-    <LinearGradient
-      colors={["#26A076", "#176438"]}
-      style={styles.headerGradient}
-    >
-      <View style={styles.row1}>
-        <Image
-          style={styles.imgProfile}
-          source={{
-            uri: "https://th.bing.com/th/id/R.902fb01972a7d62c03d6bf23c5b16dae?rik=BednsWHWMl1r5g&pid=ImgRaw&r=0",
-          }}
-        />
-        <Ionicons name="notifications" size={24} color="white" />
-      </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.greetingText}>Olá, {userName}</Text>
-        <Text style={styles.welcomeText}>Bem-vindo ao DP PE.</Text>
-        <View style={styles.locationContainer}>
-          <Feather name="map-pin" size={14} color="white" />
-          <Text style={styles.locationText}>{location}</Text>
+      <LinearGradient
+        colors={["#26A076", "#176438"]}
+        style={styles.headerGradient}
+      >
+        <View style={styles.row1}>
+          <Image
+            style={styles.imgProfile}
+            source={{
+              uri: "https://th.bing.com/th/id/R.902fb01972a7d62c03d6bf23c5b16dae?rik=BednsWHWMl1r5g&pid=ImgRaw&r=0",
+            }}
+          />
+          <Ionicons name="notifications" size={24} color="white" />
         </View>
-      </View>
-
-      <Search />
-    </LinearGradient>
-
-    
+        <View style={styles.textContainer}>
+          <Text style={styles.greetingText}>Olá, {userName}</Text>
+          <Text style={styles.welcomeText}>Bem-vindo ao DP PE.</Text>
+          <View style={styles.locationContainer}>
+            <Feather name="map-pin" size={14} color="white" />
+            <Text style={styles.locationText}>{location}</Text>
+          </View>
+        </View>
+      </LinearGradient>
     </>
   );
 };
@@ -46,13 +41,13 @@ const Header: React.FC<HeaderProps> = ({ userName, location }) => {
 const styles = StyleSheet.create({
   headerGradient: {
     width: "100%",
-    height: "30%",
+    height: "25%",
     justifyContent: "flex-start",
     alignItems: "center",
-    paddingTop: 50,
+    paddingTop: 40,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   row1: {
     flexDirection: "row",
@@ -73,15 +68,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 24,
     fontWeight: "bold",
+    marginTop: 5,
   },
   welcomeText: {
     color: "white",
     fontSize: 14,
+    marginTop: 5,
   },
   locationContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 5,
   },
   locationText: {
     color: "white",

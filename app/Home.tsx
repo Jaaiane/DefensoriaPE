@@ -8,9 +8,9 @@ import {
   Dimensions,
 } from "react-native";
 import Header from "./components/Header";
-// import App from "./components/Navegação";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useRouter } from "expo-router";
+import Layout from "./_layout";
 
 const { width } = Dimensions.get("window");
 
@@ -24,8 +24,8 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" />
+    <View style={{ flex: 1 }}>
+      {/* <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" /> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.screen}
@@ -54,6 +54,7 @@ export default function Home() {
               </Text>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: "#4EA483" }]}
+                onPress={() => router.push("/Agendamento")}
               >
                 <Ionicons name="add" size={20} color="#FFF" />
               </TouchableOpacity>
@@ -73,7 +74,7 @@ export default function Home() {
               </Text>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: "#EBC57A" }]}
-                onPress={() => router.push('/Processos')}
+                onPress={() => router.push("/Processos")}
               >
                 <Ionicons name="add" size={20} color="#FFF" />
               </TouchableOpacity>
@@ -101,7 +102,7 @@ export default function Home() {
               <MaterialCommunityIcons
                 name="scale-balance"
                 size={30}
-                color="#26A076"
+                color="#000"
               />
             </View>
             <View style={styles.textContainer}>
@@ -114,7 +115,7 @@ export default function Home() {
           </View>
           <View style={styles.serviceCard}>
             <View style={styles.iconCircle}>
-              <Feather name="headphones" size={30} color="#26A076" />
+              <Feather name="headphones" size={30} color="#000" />
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.serviceTitle}>Ouvidoria</Text>
@@ -126,26 +127,10 @@ export default function Home() {
           </View>
           <View style={styles.serviceCard}>
             <View style={styles.iconCircle}>
-              <Ionicons name="information-circle" size={30} color="#26A076" />
+              <Ionicons name="information-circle" size={30} color="#000" />
             </View>
             <View style={styles.textContainer}>
-              <Text style={styles.serviceTitle}>Informações</Text>
-              <Text style={styles.serviceText}>
-                Navegue por nossas áreas de atuação e descubra como podemos
-                ajudar você!
-              </Text>
-            </View>
-          </View>
-          <View style={styles.serviceCard}>
-            <View style={styles.iconCircle}>
-              <MaterialCommunityIcons
-                name="file-document"
-                size={30}
-                color="#26A076"
-              />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.serviceTitle}>Seus Direitos</Text>
+              <Text style={styles.serviceTitle}>Documentações Necessárias</Text>
               <Text style={styles.serviceText}>
                 Navegue por nossas áreas de atuação e descubra como podemos
                 ajudar você!
@@ -170,29 +155,29 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
-      {/* <App/> */}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, // Faz o layout ocupar o espaço total
+    flex: 1, 
+  },
+  content: {
+    flex: 1,
   },
   screenContent: {
     flexGrow: 1,
-    paddingBottom: 20,
+    paddingBottom: 100,
   },
   container: {
     height: 200,
-    // backgroundColor: '#fff',
     justifyContent: "center",
     alignItems: "center",
   },
   scrollView: {
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: 'center'
   },
   card: {
     width: 340,
@@ -279,7 +264,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#E9F8F3",
+    backgroundColor: "rgba(64, 210, 163, 0.33)",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 15,
@@ -293,7 +278,7 @@ const styles = StyleSheet.create({
     color: "#424242",
   },
   serviceText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#424242",
     marginTop: 4,
   },

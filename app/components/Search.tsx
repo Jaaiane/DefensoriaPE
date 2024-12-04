@@ -1,19 +1,34 @@
 import React from "react";
-import { View, TextInput, StyleSheet, TextInputProps } from "react-native";
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  TextInputProps,
+  KeyboardAvoidingView,
+  Platform
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 interface SearchProps extends TextInputProps {}
 
-export function Search({ ...props }: SearchProps) {
+function Search({ ...props }: SearchProps) {
   return (
-    <View style={styles.container}>
-      <Feather name="search" size={24} color="#64748b" />
-      <TextInput placeholder="Pesquisar" style={styles.input} {...props} />
-    </View>
+    <KeyboardAvoidingView
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={styles.keyboardAvoidingContainer}>
+      <View style={styles.container}>
+        <Feather name="search" size={24} color="#64748b" />
+        <TextInput placeholder="Pesquisar" style={styles.input} {...props} />
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  keyboardAvoidingContainer: {
+    flex: 1,
+  },
+
   container: {
     width: "85%",
     flexDirection: "row",
@@ -32,3 +47,5 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
 });
+
+export default Search;

@@ -5,45 +5,28 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  Image,
   Alert,
 } from "react-native";
+import Header from "./components/Header";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { LinearGradient } from "expo-linear-gradient";
 import { Picker } from "@react-native-picker/picker";
-import { Feather } from "@expo/vector-icons";
-import { Search } from "./components/Search";
 import { Calendar, DateData } from "react-native-calendars";
+import { useRouter } from "expo-router";
 
 
 export default function Agendamento() {
   const [currentStep, setCurrentStep] = useState(1);
   const [motivo, setMotivo] = useState("");
   const [descricao, setDescricao] = useState("");
-
-  const [deQuemPension, setDeQuemPension] = useState("");
   const [cep, setCep] = useState("");
-
   const [isSelected, setIsSelected] = useState(false);
   const [selectedDate, setSelectedDate] = useState<string>(' ');
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-  const [temProcessoJudicial, setTemProcessoJudicial] = useState<
-    boolean | null
-  >(null);
-  const [pagarPensao, setPagarPensao] = useState<boolean | null>(null);
-  const [registroPais, setRegistroPais] = useState<boolean | null>(null);
-  const [paiVivo, setPaiVivo] = useState<boolean | null>(null);
-  const [celularSeu, setCelularSeu] = useState<boolean | null>(null);
-  const [acessoInternet, setAcessoInternet] = useState<boolean | null>(null);
-  const [agendamentoOnline, setAgendamentoOnline] = useState<boolean | null>(
-    null
-  );
-
   const availableTimes = ["08:00", "08:30", "09:00", "09:30", "10:00"];
 
   const handleNextStep = () => {
-    if (currentStep < 7) {
+    if (currentStep < 4) { // Alterado para 4 etapas
       setCurrentStep(currentStep + 1);
     }
   };
@@ -62,7 +45,6 @@ export default function Agendamento() {
       );
       return;
     }
-    // Aqui, você pode implementar a lógica de salvar ou enviar os dados para o backend
     Alert.alert(
       "Agendamento Confirmado",
       `Data: ${selectedDate} \nHorário: ${selectedTime}`
@@ -71,40 +53,16 @@ export default function Agendamento() {
 
   const onDayPress = (day: DateData) => {
     setSelectedDate(day.dateString);
-  }
+  };
+
+  const router = useRouter();
+  const handleBackPress = () => {
+    router.push('/Home')
+  };
 
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={["#26A076", "#176438"]}
-        style={styles.headerGradient}
-      >
-        <View style={styles.row1}>
-          <Image
-            style={styles.imgProfile}
-            source={{
-              uri: "https://th.bing.com/th/id/R.902fb01972a7d62c03d6bf23c5b16dae?rik=BednsWHWMl1r5g&pid=ImgRaw&r=0",
-            }}
-          />
-          <Ionicons name="notifications" size={24} color="white" />
-        </View>
-
-        <View style={styles.textContainer}>
-          <Text style={{ color: "white", fontSize: 24 }}>Olá, Everalda</Text>
-          <Text style={{ color: "white", fontSize: 14 }}>
-            Bem-vindo ao DP PE.
-          </Text>
-
-          <View style={styles.locationContainer}>
-            <Feather name="map-pin" size={14} color="white" />
-            <Text style={styles.locationText}>
-              Jaboatão, Pernambuco - Brasil
-            </Text>
-          </View>
-        </View>
-
-        <Search />
-      </LinearGradient>
+      {/* <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" /> */}
 
       <View style={styles.formContainer}>
         {/* Etapa 1 */}
@@ -147,329 +105,8 @@ export default function Agendamento() {
           </View>
         )}
 
+        {/* Etapa 2 */}
         {currentStep === 2 && (
-          <View style={styles.stepContainer}>
-            <Text style={styles.txtAgend}>Agendamento</Text>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Você tem algum processo judicial?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    temProcessoJudicial && styles.selectedButton,
-                  ]}
-                  onPress={() => setTemProcessoJudicial(true)}
-                >
-                  <Text style={styles.textButton}>Sim</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !temProcessoJudicial && styles.selectedButton,
-                  ]}
-                  onPress={() => setTemProcessoJudicial(false)}
-                >
-                  <Text style={styles.textButton}>Não</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.card2}>
-              <Text
-                style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-              >
-                De quem será a pensão alimentícia?
-              </Text>
-
-              <View style={styles.pickerContainer}>
-                <Picker
-                  selectedValue={deQuemPension}
-                  onValueChange={(itemValue) => setDeQuemPension(itemValue)}
-                  style={styles.picker}
-                >
-                  <Picker.Item label="Selecione o responsável" value="" />
-                  <Picker.Item label="Responsável 1" value="responsavel1" />
-                  <Picker.Item label="Responsável 2" value="responsavel2" />
-                  <Picker.Item label="Responsável 3" value="responsavel3" />
-                </Picker>
-              </View>
-            </View>
-
-            <View style={styles.arrowContainer}>
-              <TouchableOpacity
-                onPress={handlePrevStep}
-                style={styles.arrowButton1}
-              >
-                <Ionicons name="arrow-back" size={30} color="#3DEB43" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleNextStep}
-                style={styles.arrowButton}
-              >
-                <Ionicons name="arrow-forward" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-
-        {currentStep === 3 && (
-          <View style={styles.stepContainer}>
-            <Text style={styles.txtAgend}>Agendamento</Text>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Pai ou mãe quer pagar pensão?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    pagarPensao && styles.selectedButton,
-                  ]}
-                  onPress={() => setPagarPensao(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !pagarPensao && styles.selectedButton,
-                  ]}
-                  onPress={() => setPagarPensao(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  A criança ou o adolescente é registrada no nome dos pais?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    registroPais && styles.selectedButton,
-                  ]}
-                  onPress={() => setRegistroPais(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !registroPais && styles.selectedButton,
-                  ]}
-                  onPress={() => setRegistroPais(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.arrowContainer}>
-              <TouchableOpacity
-                onPress={handlePrevStep}
-                style={styles.arrowButton1}
-              >
-                <Ionicons name="arrow-back" size={30} color="#3DEB43" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleNextStep}
-                style={styles.arrowButton}
-              >
-                <Ionicons name="arrow-forward" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-
-        {currentStep === 4 && (
-          <View style={styles.stepContainer}>
-            <Text style={styles.txtAgend}>Agendamento</Text>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Pai ou mãe que vai pagar pensão é vivo?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    paiVivo && styles.selectedButton,
-                  ]}
-                  onPress={() => setPaiVivo(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !paiVivo && styles.selectedButton,
-                  ]}
-                  onPress={() => setPaiVivo(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Este celular é seu?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    celularSeu && styles.selectedButton,
-                  ]}
-                  onPress={() => setCelularSeu(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !celularSeu && styles.selectedButton,
-                  ]}
-                  onPress={() => setCelularSeu(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.arrowContainer}>
-              <TouchableOpacity
-                onPress={handlePrevStep}
-                style={styles.arrowButton1}
-              >
-                <Ionicons name="arrow-back" size={30} color="#3DEB43" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleNextStep}
-                style={styles.arrowButton}
-              >
-                <Ionicons name="arrow-forward" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-
-        {currentStep === 5 && (
-          <View style={styles.stepContainer}>
-            <Text style={styles.txtAgend}>Agendamento</Text>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Você tem acesso a internet todos os dias?
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    acessoInternet && styles.selectedButton,
-                  ]}
-                  onPress={() => setAcessoInternet(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !acessoInternet && styles.selectedButton,
-                  ]}
-                  onPress={() => setAcessoInternet(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.card2}>
-              <View style={styles.rowText}>
-                <Text
-                  style={{ color: "#000000", fontSize: 15, marginBottom: 15 }}
-                >
-                  Podemos agendar seu atendimento por aqui
-                </Text>
-              </View>
-
-              <View style={styles.buttonRow}>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    agendamentoOnline && styles.selectedButton,
-                  ]}
-                  onPress={() => setAgendamentoOnline(true)}
-                >
-                  <Text style={styles.textButton}>SIM</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.buttonSimNao,
-                    !agendamentoOnline && styles.selectedButton,
-                  ]}
-                  onPress={() => setAgendamentoOnline(false)}
-                >
-                  <Text style={styles.textButton}>NÃO</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <View style={styles.arrowContainer}>
-              <TouchableOpacity
-                onPress={handlePrevStep}
-                style={styles.arrowButton1}
-              >
-                <Ionicons name="arrow-back" size={30} color="#3DEB43" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleNextStep}
-                style={styles.arrowButton}
-              >
-                <Ionicons name="arrow-forward" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-
-        {currentStep === 6 && (
           <View style={styles.stepContainer}>
             <Text style={styles.txtAgend}>Agendamento</Text>
 
@@ -503,15 +140,15 @@ export default function Agendamento() {
             <View style={styles.card6}>
               <View style={styles.localContainer}>
                 <Text style={styles.localText}>
-                  <Text style={{ color: "#000000", fontSize: 14 }}>
+                  <Text style={{ color: "#000000", fontSize: 15 }}>
                     Defensoria Pública do Estado de Pernambuco{"\n"}
                   </Text>
 
-                  <Text style={{ color: "#808380", fontSize: 10 }}>
+                  <Text style={{ color: "#808380", fontSize: 14 }}>
                     Recife - Conde da Boa Vista{"\n"}
                   </Text>
 
-                  <Text style={{ color: "#40D2A3", fontSize: 11 }}>
+                  <Text style={{ color: "#40D2A3", fontSize: 12 }}>
                     Segunda a Sábado 8:00 às 13:00
                   </Text>
                 </Text>
@@ -541,19 +178,10 @@ export default function Agendamento() {
           </View>
         )}
 
-        {currentStep === 7 && (
+        {/* Etapa 3 */}
+        {currentStep === 3 && (
           <View style={styles.stepContainer}>
-            <Text
-              style={{
-                color: "#176438",
-                fontSize: 20,
-                marginRight: 180,
-                marginTop: -34,
-                marginBottom: 10,
-              }}
-            >
-              Agendamento
-            </Text>
+            <Text style={styles.txtAgend}>Agendamento</Text>
 
             <View style={styles.card7}>
               <Calendar
@@ -576,7 +204,6 @@ export default function Agendamento() {
                   selectedDotColor: "#fff",
                   todayBackgroundColor: "#DCEDE4",
                   backgroundColor: "#DCEDE4",
-                  textDisabledColor: "#D3D3D3",
                 }}
                 style={styles.calendar}
                 minDate={new Date().toISOString().split("T")[0]}
@@ -589,6 +216,7 @@ export default function Agendamento() {
                 fontSize: 15,
                 marginRight: 170,
                 marginBottom: 5,
+                fontWeight: "bold",
               }}
             >
               Horários disponíveis
@@ -622,6 +250,7 @@ export default function Agendamento() {
               <TouchableOpacity
                 onPress={handlePrevStep}
                 style={styles.arrowButton}
+                
               >
                 <Ionicons name="arrow-back" size={30} color="white" />
               </TouchableOpacity>
@@ -633,50 +262,12 @@ export default function Agendamento() {
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
   },
-  headerGradient: {
-    width: "100%",
-    height: "35%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingTop: 50,
-    flexDirection: "column",
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    marginBottom: 20,
-  },
-  row1: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingHorizontal: 20,
-  },
-  imgProfile: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-  },
-  textContainer: {
-    alignItems: "flex-start",
-    width: "100%",
-    paddingHorizontal: 25,
-  },
-  locationContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  locationText: {
-    color: "white",
-    marginLeft: 5,
-  },
-
   formContainer: {
     width: "80%",
     marginTop: 20,
@@ -689,6 +280,7 @@ const styles = StyleSheet.create({
     color: "#176438",
     fontSize: 20,
     marginRight: 188,
+    fontWeight: "bold",
 
     marginVertical: 0,
     marginBottom: 20,
@@ -726,16 +318,17 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginRight: 160,
     marginVertical: 10,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
 
   textInput: {
-    height: 80,
-    textAlignVertical: "top",
+    height: 100,
+    // textAlign: "center",
+    textAlignVertical: 'top',
     padding: 10,
     borderRadius: 0,
     borderColor: "transparent",
-    borderWidth: 10,
+    // borderWidth: 10,
   },
   arrowButton: {
     backgroundColor: "#176438",
@@ -806,7 +399,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "top",
     padding: 10,
     borderRadius: 10,
-    borderColor: "#3DEB43",
+    borderColor: "#26A076",
     borderWidth: 1,
   },
   localText: {
@@ -823,7 +416,7 @@ const styles = StyleSheet.create({
   },
   card7: {
     backgroundColor: "#DCEDE4",
-    width: "100%",
+    width: "90%",
     padding: 1,
     borderRadius: 10,
     marginBottom: 10,
@@ -847,8 +440,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginBottom: 4,
     marginRight: 6,
-    width: 56,
-    height: 25,
+    width: 60,
+    height: 28,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -864,7 +457,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   confirmButtonText: {
-    fontSize: 12,
+    fontSize: 14,
     color: "#fff",
     fontWeight: "bold",
   },
@@ -904,7 +497,7 @@ const styles = StyleSheet.create({
   card6: {
     backgroundColor: "#EEEEEE",
     width: 295,
-    height: 96,
+    height: 110,
     padding: 15,
     borderRadius: 20,
     marginBottom: 10,
