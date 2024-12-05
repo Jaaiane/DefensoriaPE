@@ -10,7 +10,7 @@ export default function Perfil() {
 
   return (
     <View style={styles.container}>
-      {/* <LinearGradient
+      <LinearGradient
         colors={["#26A076", "#176438"]}
         style={styles.headerGradient}
       >
@@ -18,10 +18,10 @@ export default function Perfil() {
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => {
-            router.push('/Home')
+            router.push('/screens/Home')
           }}
         >
-          <Ionicons name="arrow-back-outline" size={25} color="#fff" />
+          {/* <Ionicons name="arrow-back-outline" size={25} color="#fff" /> */}
         </TouchableOpacity>
 
         <View style={styles.header}>
@@ -36,12 +36,12 @@ export default function Perfil() {
             <Text style={styles.email}>everaldasilveira@gmail.com</Text>
           </View>
         </View>
-      </LinearGradient> */}
+      </LinearGradient>
 
       <View style={styles.menuContainer}>
         <TouchableOpacity 
         style={styles.menuItem}
-        onPress={() => router.push("/MeusDados")}>
+        onPress={() => router.push("/screens/Auth/MeusDados")}>
           <Ionicons name="person-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Meus Dados</Text>
         </TouchableOpacity>
@@ -49,13 +49,17 @@ export default function Perfil() {
 
         <TouchableOpacity 
         style={styles.menuItem}
-        onPress={() => router.push("/Configuracao")}>
+        onPress={() => router.push("/screens/Perfil/Configuracao")}>
           <Ionicons name="settings-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Configurações</Text>
         </TouchableOpacity>
         <View style={styles.separator}></View>
 
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity 
+        style={styles.menuItem}
+        onPress={() => {
+          router.push('/screens/Ajuda/Ajuda')
+        }} >
           <Ionicons name="help-circle-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Ajuda</Text>
         </TouchableOpacity>

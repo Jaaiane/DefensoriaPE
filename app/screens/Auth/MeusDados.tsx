@@ -6,7 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 const MeusDadosScreen: React.FC = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
   return (
     <SafeAreaProvider>
@@ -23,7 +23,9 @@ const MeusDadosScreen: React.FC = () => {
               name="arrow-back"
               size={24}
               color="#FFFFFF"
-              // onPress={() => router.back()} 
+              onPress={() => {
+                router.push('/screens/Perfil/Perfil')
+              }} 
             />
             <Text style={styles.headerTitle}>Meus Dados</Text>
           </View>
@@ -83,13 +85,12 @@ const MeusDadosScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
   },
   header: {
     width: "100%",
-    height: 100,
+    height: 80,
     justifyContent: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 18,
   },
   headerContent: {
     flexDirection: "row",

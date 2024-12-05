@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import Header from "./components/Header";
+import Header from "../components/Header";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { router, useRouter } from "expo-router";
-import Layout from "./_layout";
 
 const { width } = Dimensions.get("window");
 
@@ -23,14 +22,16 @@ export default function Home() {
     SetActiveIndex(index);
   };
 
+  const router = useRouter();
+
   return (
     <View style={{ flex: 1 }}>
-      {/* <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" /> */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.screen}
         contentContainerStyle={styles.screenContent}
       >
+        <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" />
         <View style={styles.container}>
           <ScrollView
             horizontal
@@ -54,7 +55,7 @@ export default function Home() {
               </Text>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: "#4EA483" }]}
-                onPress={() => router.push("/Agendamento")}
+                onPress={() => router.push("/screens/Agendamento/Agendamento")}
               >
                 <Ionicons name="add" size={20} color="#FFF" />
               </TouchableOpacity>
@@ -74,7 +75,7 @@ export default function Home() {
               </Text>
               <TouchableOpacity
                 style={[styles.button, { backgroundColor: "#EBC57A" }]}
-                onPress={() => router.push("/Processos")}
+                onPress={() => router.push("/screens/Processos/Processos")}
               >
                 <Ionicons name="add" size={20} color="#FFF" />
               </TouchableOpacity>
@@ -103,6 +104,9 @@ export default function Home() {
                 name="scale-balance"
                 size={30}
                 color="#000"
+                onPress={() => {
+                  router.push("/screens/Atividades/Atuacao");
+                }}
               />
             </View>
             <View style={styles.textContainer}>
@@ -115,7 +119,14 @@ export default function Home() {
           </View>
           <View style={styles.serviceCard}>
             <View style={styles.iconCircle}>
-              <Feather name="headphones" size={30} color="#000" />
+              <Feather
+                name="headphones"
+                size={30}
+                color="#000"
+                onPress={() => {
+                  router.push("/screens/Atividades/Ouvidoria");
+                }}
+              />
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.serviceTitle}>Ouvidoria</Text>
@@ -127,7 +138,14 @@ export default function Home() {
           </View>
           <View style={styles.serviceCard}>
             <View style={styles.iconCircle}>
-              <Ionicons name="information-circle" size={30} color="#000" />
+              <Ionicons
+                name="information-circle"
+                size={30}
+                color="#000"
+                onPress={() => {
+                  router.push("/screens/Atividades/Documentacao");
+                }}
+              />
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.serviceTitle}>Documentações Necessárias</Text>
@@ -161,7 +179,7 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1, 
+    flex: 1,
   },
   content: {
     flex: 1,
@@ -169,22 +187,24 @@ const styles = StyleSheet.create({
   screenContent: {
     flexGrow: 1,
     paddingBottom: 100,
+    paddingTop: 0,
   },
   container: {
-    height: 200,
+    height: 230,
     justifyContent: "center",
     alignItems: "center",
   },
   scrollView: {
     flexDirection: "row",
     alignItems: "center",
+    // marginTop: 20,
   },
   card: {
-    width: 340,
+    width: width * 0.8,
     borderRadius: 15,
-    height: 170,
-    padding: 20,
-    marginHorizontal: 45,
+    height: 180,
+    padding: width * 0.05,
+    marginHorizontal: width * 0.1,
     justifyContent: "space-between",
     backgroundColor: "#fff",
     shadowColor: "#000",
@@ -197,17 +217,17 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   title: {
-    fontSize: 23,
+    fontSize: width * 0.06,
     fontWeight: "bold",
     marginBottom: 8,
   },
   description: {
-    fontSize: 14,
+    fontSize: width * 0.04,
     color: "#666",
     marginBottom: 8,
   },
   link: {
-    fontSize: 14,
+    fontSize: width * 0.04,
     fontWeight: "bold",
   },
   button: {

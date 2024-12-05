@@ -10,11 +10,11 @@ type NavigationItem = {
 };
 
 const navigationItems: NavigationItem[] = [
-  { label: "Home", iconName: "home-outline", route: "/Home" },
-  { label: "Mapa", iconName: "map-outline", route: "/Mapa" },
-  { label: "Agendamento", iconName: "calendar-outline", route: "/Agendamento" },
-  { label: "Processos", iconName: "folder-outline", route: "/Processos" },
-  { label: "Perfil", iconName: "person-outline", route: "/Perfil" },
+  { label: "Home", iconName: "home-outline", route: "/screens/Home" },
+  { label: "Mapa", iconName: "map-outline", route: "/screens/Processos/Mapa" },
+  { label: "Agendamento", iconName: "calendar-outline", route: "/screens/Agendamento/Agendamento" },
+  { label: "Processos", iconName: "folder-outline", route: "/screens/Processos/Processos" },
+  { label: "Perfil", iconName: "person-outline", route: "/screens/Perfil/Perfil" },
 ];
 
 const BottomNavigation: React.FC = () => {

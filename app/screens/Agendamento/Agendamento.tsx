@@ -7,14 +7,14 @@ import {
   TextInput,
   Alert,
 } from "react-native";
-import Header from "./components/Header";
+import Header from "../../components/Header";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { Calendar, DateData } from "react-native-calendars";
 import { useRouter } from "expo-router";
+import Api from "@/src/api/agendamentosApi";
 
-
-export default function Agendamento() {
+function Agendamento() {
   const [currentStep, setCurrentStep] = useState(1);
   const [motivo, setMotivo] = useState("");
   const [descricao, setDescricao] = useState("");
@@ -57,12 +57,13 @@ export default function Agendamento() {
 
   const router = useRouter();
   const handleBackPress = () => {
-    router.push('/Home')
+    router.push('/screens/Home')
   };
 
   return (
+    <>
+    <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" />
     <View style={styles.container}>
-      {/* <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" /> */}
 
       <View style={styles.formContainer}>
         {/* Etapa 1 */}
@@ -259,6 +260,7 @@ export default function Agendamento() {
         )}
       </View>
     </View>
+    </>
   );
 }
 
@@ -281,7 +283,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginRight: 188,
     fontWeight: "bold",
-
     marginVertical: 0,
     marginBottom: 20,
   },
@@ -503,3 +504,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+
+export default Agendamento;

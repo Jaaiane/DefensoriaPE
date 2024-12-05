@@ -1,5 +1,10 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { 
+  View, 
+  Text, 
+  Image, 
+  StyleSheet,
+  Dimensions} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
@@ -8,6 +13,8 @@ interface HeaderProps {
   userName: string;
   location: string;
 }
+
+const { height } = Dimensions.get("window");
 
 const Header: React.FC<HeaderProps> = ({ userName, location }) => {
   return (
@@ -41,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ userName, location }) => {
 const styles = StyleSheet.create({
   headerGradient: {
     width: "100%",
-    height: "25%",
+    height: height * 0.25,
     justifyContent: "flex-start",
     alignItems: "center",
     paddingTop: 40,

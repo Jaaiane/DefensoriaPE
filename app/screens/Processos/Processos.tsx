@@ -1,11 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import Header from "../../components/Header";
 
 export default function Processos() {
   return (
     <View style={styles.Container1}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" /> */}
+      <ScrollView showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.screenContent}>
+        <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" />
         <Text style={[styles.infoText]}>Seus Processos</Text>
 
         <View style={styles.container}>
@@ -113,6 +115,10 @@ export default function Processos() {
 const styles = StyleSheet.create({
   Container1: {
     flex: 1,
+  },
+  screenContent: {
+    flexGrow: 1,
+    paddingBottom: 100,
   },
   container: {
     alignItems: "center",

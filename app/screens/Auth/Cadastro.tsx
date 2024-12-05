@@ -49,7 +49,7 @@ const RegisterScreen = () => {
 
   const router = useRouter();
   const handleBackPress = () => {
-    router.push('/Home')
+    router.push('/screens/Home')
   };
 
   // Função para validar o CPF
@@ -152,7 +152,7 @@ const RegisterScreen = () => {
               Bem-vindos.{"\n"}Crie sua conta agora
             </Text>
             <Image
-              source={require("../assets/illustrations/logo.png")}
+              source={require("../../../assets/illustrations/logo.png")}
               style={styles.logo}
             />
           </View>

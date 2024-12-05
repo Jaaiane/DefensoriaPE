@@ -14,7 +14,7 @@ import { useRouter } from "expo-router";
 
 const ConfiguracoesScreen: React.FC = () => {
   const [isNotificationsEnabled, setIsNotificationsEnabled] = useState(true);
-//   const router = useRouter();
+  const router = useRouter();
 
   const toggleSwitch = () => setIsNotificationsEnabled(!isNotificationsEnabled);
 
@@ -33,7 +33,9 @@ const ConfiguracoesScreen: React.FC = () => {
               name="arrow-back"
               size={24}
               color="#FFFFFF"
-            //   onPress={() => router.back()}
+              onPress={() => {
+                router.push('/screens/Perfil/Perfil')
+              }} 
             />
             <Text style={styles.headerTitle}>Configurações</Text>
           </View>
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
   },
   header: {
     width: "100%",
-    height: 100,
+    height: 80,
     justifyContent: "center",
     paddingHorizontal: 15,
   },
