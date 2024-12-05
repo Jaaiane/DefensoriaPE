@@ -19,7 +19,7 @@ const navigationItems: NavigationItem[] = [
 
 const BottomNavigation: React.FC = () => {
   const router = useRouter();
-  const segments = useSegments(); // Obtém os segmentos da rota atual
+  const segments = useSegments(); 
 
   // Determina qual item está ativo com base no segmento
   const activeRoute = `/${segments[0]}`; // Primeiro segmento é a rota principal

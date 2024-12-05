@@ -12,7 +12,8 @@ import {
   Platform,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
+import { UsuarioService } from "@/src/Services/UsuarioService";
 
 // Define o tipo para os dados do formulário
 type FormData = {
@@ -20,13 +21,6 @@ type FormData = {
   cpf: string;
   email: string;
   confirmEmail: string;
-  password: string;
-  confirmPassword: string;
-};
-
-// Define o tipo para os erros
-type FormErrors = {
-  cpf: string;
   password: string;
   confirmPassword: string;
 };
@@ -41,66 +35,41 @@ const RegisterScreen = () => {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState<FormErrors>({
-    cpf: "",
-    password: "",
-    confirmPassword: "",
-  });
-
   const router = useRouter();
-  const handleBackPress = () => {
-    router.push('/screens/Home')
-  };
-
-  // Função para validar o CPF
-  const validateCPF = (value: string): boolean => {
-    const regex = /^\d+$/; // Aceita apenas números
-    return regex.test(value);
-  };
-
-  // Função para verificar a força da senha
-  const checkPasswordStrength = (value: string): string => {
-    if (value.length < 6) return "Fraca";
-    if (value.length < 10) return "Moderada";
-    return "Forte";
-  };
+  // const handleBackPress = () => {
+  //   router.push("/screens/Home");
+  // };
 
   // Função para lidar com mudanças de input
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
+  };
 
-    // Validação específica por campo
-    if (field === "cpf") {
-      if (validateCPF(value)) {
-        setErrors((prevErrors) => ({ ...prevErrors, cpf: "" }));
-      } else {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          cpf: "CPF deve conter apenas números.",
-        }));
-      }
+  const handleRegister = async () => {
+    // Validação básica
+    if (formData.password !== formData.confirmPassword) {
+      alert("As senhas não coincidem.");
+      return;
     }
 
-    if (field === "password") {
-      const strength = checkPasswordStrength(value);
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password:
-          strength === "Fraca"
-            ? "A senha é fraca."
-            : strength === "Moderada"
-            ? "A senha é moderada."
-            : "",
-      }));
+    if (formData.email !== formData.confirmEmail) {
+      alert("Os e-mails não coincidem.");
+      return;
     }
 
-    if (field === "confirmPassword") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        confirmPassword:
-          value !== formData.password ? "As senhas não coincidem." : "",
-      }));
-    }
+    // Criar um objeto de usuário
+    const usuario = {
+      nome: formData.name,
+      cpf: formData.cpf,
+      email: formData.email,
+      senha: formData.password,
+    };
+
+    // Armazenar no AsyncStorage
+    await UsuarioService.addUsuario(usuario);
+
+    // Navegar para a tela inicial ou outra tela após o cadastro
+    router.push("/screens/Home");
   };
 
   const FormField = ({
@@ -108,7 +77,6 @@ const RegisterScreen = () => {
     placeholder,
     value,
     onChangeText,
-    error,
     secureTextEntry,
     keyboardType,
   }: {
@@ -116,7 +84,6 @@ const RegisterScreen = () => {
     placeholder: string;
     value: string;
     onChangeText: (text: string) => void;
-    error?: string;
     secureTextEntry?: boolean;
     keyboardType?: TextInputProps["keyboardType"];
   }) => (
@@ -132,7 +99,6 @@ const RegisterScreen = () => {
         keyboardType={keyboardType}
         returnKeyType="done"
       />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>
   );
 
@@ -160,9 +126,9 @@ const RegisterScreen = () => {
           {/* Conteúdo do Formulário */}
           <View style={styles.formContainer}>
             <View style={styles.headerContainer}>
-              <TouchableOpacity onPress={handleBackPress}>
+              {/* <TouchableOpacity onPress={handleBackPress}>
                 <Ionicons name="arrow-back" size={24} color="#000" />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
               <Text style={styles.title}>Cadastrar</Text>
             </View>
 
@@ -179,7 +145,6 @@ const RegisterScreen = () => {
               keyboardType="numeric"
               value={formData.cpf}
               onChangeText={(text) => handleInputChange("cpf", text)}
-              error={errors.cpf}
             />
             <FormField
               label="Email"
@@ -193,9 +158,7 @@ const RegisterScreen = () => {
               placeholder="Digite novamente seu email"
               keyboardType="email-address"
               value={formData.confirmEmail}
-              onChangeText={(text) =>
-                handleInputChange("confirmEmail", text)
-              }
+              onChangeText={(text) => handleInputChange("confirmEmail", text)}
             />
             <FormField
               label="Senha"
@@ -203,13 +166,7 @@ const RegisterScreen = () => {
               secureTextEntry
               value={formData.password}
               onChangeText={(text) => handleInputChange("password", text)}
-              error={errors.password}
             />
-            {formData.password && (
-              <Text style={styles.passwordStrength}>
-                Força da senha: {checkPasswordStrength(formData.password)}
-              </Text>
-            )}
             <FormField
               label="Confirme a senha"
               placeholder="Confirme sua senha"
@@ -218,11 +175,10 @@ const RegisterScreen = () => {
               onChangeText={(text) =>
                 handleInputChange("confirmPassword", text)
               }
-              error={errors.confirmPassword}
             />
 
             {/* Botão de Cadastrar */}
-            <TouchableOpacity style={styles.registerButton}>
+            <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
               <Text style={styles.registerButtonText}>CADASTRAR</Text>
             </TouchableOpacity>
           </View>
@@ -304,16 +260,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
-  },
-  errorText: {
-    color: "red",
-    fontSize: 12,
-    marginTop: 5,
-  },
-  passwordStrength: {
-    color: "#333",
-    fontSize: 14,
-    marginTop: 5,
   },
 });
 

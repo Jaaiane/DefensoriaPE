@@ -139,6 +139,9 @@ export default function App() {
   );
 
   const router = useRouter();
+  const handleBackPress = () => {
+    router.push("/screens/Home");
+  };
 
   return (
     <SafeAreaProvider>
@@ -154,7 +157,7 @@ export default function App() {
               name="arrow-back"
               size={24}
               color="#FFFFFF"
-              onPress={() => alert("Voltar!")}
+              onPress={handleBackPress}
             />
             <Text style={styles.headerTitle}>Áreas de Atuação</Text>
           </View>

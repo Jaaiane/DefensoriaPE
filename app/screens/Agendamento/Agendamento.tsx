@@ -12,7 +12,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { Calendar, DateData } from "react-native-calendars";
 import { useRouter } from "expo-router";
-import Api from "@/src/api/agendamentosApi";
+import { AgendamentoService } from "@/src/Services/AgendamentoService";
 
 function Agendamento() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -37,28 +37,34 @@ function Agendamento() {
     }
   };
 
-  const handleConfirmAgendamento = () => {
-    if (!selectedDate || !selectedTime) {
-      Alert.alert(
-        "Erro",
-        "Por favor, selecione a data e o horário para o agendamento."
-      );
-      return;
+  const handleConfirmAgendamento = async () => {
+    if (!selectedDate || !selectedTime || !motivo || !descricao) {
+        Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
+        return;
     }
-    Alert.alert(
-      "Agendamento Confirmado",
-      `Data: ${selectedDate} \nHorário: ${selectedTime}`
-    );
-  };
 
-  const onDayPress = (day: DateData) => {
-    setSelectedDate(day.dateString);
-  };
+    const agendamento = {
+        usuarioId: "1", // Você pode substituir por um ID real de um usuário.
+        dataHora: `${selectedDate} ${selectedTime}`,
+        areaSelecionada: motivo,
+        descricaoCaso: descricao,
+    };
 
-  const router = useRouter();
-  const handleBackPress = () => {
-    router.push('/screens/Home')
-  };
+    // Armazenar no AsyncStorage
+    await AgendamentoService.addAgendamento(agendamento);
+
+    Alert.alert("Agendamento Confirmado", `Data: ${selectedDate} \nHorário: ${selectedTime}`);
+};
+
+const onDayPress = (day: DateData) => { 
+    setSelectedDate(day.dateString); 
+}; 
+
+const router = useRouter(); 
+
+const handleBackPress = () => { 
+    router.push('/screens/Home'); 
+}; 
 
   return (
     <>

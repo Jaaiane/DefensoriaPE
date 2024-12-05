@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,18 @@ import {
   Image,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRouter } from "expo-router";
 
 const LoginScreen = () => {
+  const router = useRouter();
   const handleBackPress = () => {
-    // Aqui você pode implementar a lógica para voltar à tela inicial
-    console.log("Voltar para a tela inicial");
+    router.push("/screens/Home");
   };
+
+  const handleCadastro = () => {
+    router.push("/screens/Auth/Cadastro");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -25,9 +31,6 @@ const LoginScreen = () => {
 
       <View style={styles.formContainer}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={handleBackPress}>
-            <Ionicons name="arrow-back" size={24} color="#000" />
-          </TouchableOpacity>
           <Text style={styles.title}>ENTRAR</Text>
         </View>
 
@@ -41,13 +44,13 @@ const LoginScreen = () => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginButton}>
+        <TouchableOpacity style={styles.loginButton} onPress={handleBackPress}>
           <Text style={styles.loginButtonText}>ENTRAR</Text>
         </TouchableOpacity>
 
         <Text style={styles.orText}>Não possui uma conta?</Text>
 
-        <TouchableOpacity style={styles.govButton}>
+        <TouchableOpacity style={styles.govButton} onPress={handleCadastro}>
           <Text style={styles.govButtonText}>CADASTRE-SE</Text>
         </TouchableOpacity>
       </View>

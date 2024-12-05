@@ -3,6 +3,8 @@ import { View, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppIntro from './AppIntro'; // Tela de Introdução
 import Home from './screens/Home'; // Tela Home
+import RegisterScreen from './screens/Auth/Cadastro';
+import LoginScreen from './screens/Auth/Login';
 
 const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState(true); // Controla o carregamento
@@ -35,7 +37,7 @@ const HomeScreen = () => {
   }
 
   // Exibe AppIntro se for a primeira vez, senão exibe Home
-  return hasSeenIntro ? <Home /> : <AppIntro />;
+  return hasSeenIntro ? <LoginScreen /> : <AppIntro />;
 };
 
 export default HomeScreen;

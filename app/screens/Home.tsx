@@ -161,6 +161,28 @@ export default function Home() {
                 name="file-document"
                 size={30}
                 color="#000"
+                onPress={() => {
+                  router.push("/screens/Atividades/SeusDireitos");
+                }}
+              />
+            </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.serviceTitle}>Seus Direitos</Text>
+              <Text style={styles.serviceText}>
+                Navegue por nossas áreas de atuação e descubra como podemos
+                ajudar você!
+              </Text>
+            </View>
+          </View>
+          <View style={styles.serviceCard}>
+            <View style={styles.iconCircle}>
+              <MaterialCommunityIcons
+                name="file-document"
+                size={30}
+                color="#000"
+                onPress={() => {
+                  router.push("/screens/Atividades/ChatBoot");
+                }}
               />
             </View>
             <View style={styles.textContainer}>
