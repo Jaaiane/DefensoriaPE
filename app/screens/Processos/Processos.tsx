@@ -5,8 +5,10 @@ import Header from "../../components/Header";
 export default function Processos() {
   return (
     <View style={styles.Container1}>
-      <ScrollView showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.screenContent}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.screenContent}
+      >
         <Header userName="Everalda" location="Jaboatão, Pernambuco - Brasil" />
         <Text style={[styles.infoText]}>Seus Processos</Text>
 

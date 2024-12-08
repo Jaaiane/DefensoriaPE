@@ -34,7 +34,7 @@ const SeusDireitosScreen: React.FC<any> = () => {
         {/* Conteúdo */}
         <ScrollView
           style={styles.content}
-          showsVerticalScrollIndicator={false} // Remove a barra de rolagem
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
         >
           {/* Introdução */}

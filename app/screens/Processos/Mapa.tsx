@@ -5,7 +5,6 @@ import Map, { Marker, Callout } from "react-native-maps";
 import Icon from "@expo/vector-icons/Ionicons";
 
 const coordinate = {
-  //corrigir
   latitude: -8.055839166708282,
   longitude: -34.892541732692436,
 };

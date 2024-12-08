@@ -50,7 +50,6 @@ export default function AppIntro() {
     const index = Math.round(scrollPosition / width);
     setCurrentIndex(index);
 
-    // Redirecionar automaticamente ao final
     if (index === slides.length - 1) {
       handleCompleteIntro();
     }
@@ -60,7 +59,7 @@ export default function AppIntro() {
   const handleCompleteIntro = async () => {
     try {
       await AsyncStorage.setItem("hasSeenIntro", "true"); // Salva no AsyncStorage
-      router.replace("/screens/Home"); // Verifique se esse caminho está correto
+      router.replace("/screens/Home");
     } catch (error) {
       console.error("Erro ao salvar no AsyncStorage:", error);
     }
@@ -112,7 +111,10 @@ export default function AppIntro() {
 
       <View style={styles.footer}>
         <View style={styles.dotsWrapper}>{renderDots()}</View>
-        <TouchableOpacity onPress={handleCompleteIntro} style={styles.skipButton}>
+        <TouchableOpacity
+          onPress={handleCompleteIntro}
+          style={styles.skipButton}
+        >
           <Text style={styles.skipText}>PULAR</Text>
         </TouchableOpacity>
       </View>

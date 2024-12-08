@@ -6,8 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 const OuvidoriaScreen: React.FC = () => {
-
-    const router = useRouter();
+  const router = useRouter();
 
   return (
     <SafeAreaProvider>
@@ -24,7 +23,7 @@ const OuvidoriaScreen: React.FC = () => {
               size={24}
               color="#FFFFFF"
               onPress={() => {
-                router.push('/screens/Home')
+                router.push("/screens/Home");
               }}
             />
             <Text style={styles.headerTitle}>Ouvidoria</Text>

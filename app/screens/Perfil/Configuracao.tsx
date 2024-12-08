@@ -34,8 +34,8 @@ const ConfiguracoesScreen: React.FC = () => {
               size={24}
               color="#FFFFFF"
               onPress={() => {
-                router.push('/screens/Perfil/Perfil')
-              }} 
+                router.push("/screens/Perfil/Perfil");
+              }}
             />
             <Text style={styles.headerTitle}>Configurações</Text>
           </View>

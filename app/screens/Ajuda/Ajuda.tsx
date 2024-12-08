@@ -6,8 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 const AjudaScreen: React.FC = () => {
-
-    const router = useRouter();
+  const router = useRouter();
 
   return (
     <SafeAreaProvider>
@@ -25,8 +24,8 @@ const AjudaScreen: React.FC = () => {
               size={24}
               color="#FFFFFF"
               onPress={() => {
-                router.push('/screens/Perfil/Perfil')
-              }} 
+                router.push("/screens/Perfil/Perfil");
+              }}
             />
             <Text style={styles.headerTitle}>Ajuda</Text>
           </View>

@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -24,8 +30,8 @@ const MeusDadosScreen: React.FC = () => {
               size={24}
               color="#FFFFFF"
               onPress={() => {
-                router.push('/screens/Perfil/Perfil')
-              }} 
+                router.push("/screens/Perfil/Perfil");
+              }}
             />
             <Text style={styles.headerTitle}>Meus Dados</Text>
           </View>

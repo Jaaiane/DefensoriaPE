@@ -68,7 +68,7 @@ const RegisterScreen = () => {
     // Armazenar no AsyncStorage
     await UsuarioService.addUsuario(usuario);
 
-    // Navegar para a tela inicial ou outra tela após o cadastro
+    // Navegar para a tela inicial
     router.push("/screens/Home");
   };
 
@@ -178,7 +178,10 @@ const RegisterScreen = () => {
             />
 
             {/* Botão de Cadastrar */}
-            <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
+            <TouchableOpacity
+              style={styles.registerButton}
+              onPress={handleRegister}
+            >
               <Text style={styles.registerButtonText}>CADASTRAR</Text>
             </TouchableOpacity>
           </View>

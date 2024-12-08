@@ -93,7 +93,6 @@ const DocumentacoesScreen: React.FC<any> = () => {
     router.push("/screens/Home");
   };
 
-
   return (
     <SafeAreaProvider>
       <View style={styles.container}>

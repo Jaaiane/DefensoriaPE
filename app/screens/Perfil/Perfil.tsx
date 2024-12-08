@@ -5,7 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter, router } from "expo-router";
 
 export default function Perfil() {
-
   const router = useRouter();
 
   return (
@@ -14,11 +13,10 @@ export default function Perfil() {
         colors={["#26A076", "#176438"]}
         style={styles.headerGradient}
       >
-       
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => {
-            router.push('/screens/Home')
+            router.push("/screens/Home");
           }}
         >
           {/* <Ionicons name="arrow-back-outline" size={25} color="#fff" /> */}
@@ -39,27 +37,30 @@ export default function Perfil() {
       </LinearGradient>
 
       <View style={styles.menuContainer}>
-        <TouchableOpacity 
-        style={styles.menuItem}
-        onPress={() => router.push("/screens/Auth/MeusDados")}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => router.push("/screens/Auth/MeusDados")}
+        >
           <Ionicons name="person-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Meus Dados</Text>
         </TouchableOpacity>
         <View style={styles.separator}></View>
 
-        <TouchableOpacity 
-        style={styles.menuItem}
-        onPress={() => router.push("/screens/Perfil/Configuracao")}>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => router.push("/screens/Perfil/Configuracao")}
+        >
           <Ionicons name="settings-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Configurações</Text>
         </TouchableOpacity>
         <View style={styles.separator}></View>
 
-        <TouchableOpacity 
-        style={styles.menuItem}
-        onPress={() => {
-          router.push('/screens/Ajuda/Ajuda')
-        }} >
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => {
+            router.push("/screens/Ajuda/Ajuda");
+          }}
+        >
           <Ionicons name="help-circle-outline" size={24} color="#000000" />
           <Text style={styles.menuText}>Ajuda</Text>
         </TouchableOpacity>
@@ -120,12 +121,11 @@ const styles = StyleSheet.create({
     // marginEnd: 20,
     // marginBottom: 0,
     marginTop: 50,
-    
   },
   email: {
     fontSize: 17,
     color: "#fff",
-    textAlign: 'center'
+    textAlign: "center",
   },
   menuContainer: {
     padding: 35,

@@ -1,10 +1,10 @@
 import { Slot } from "expo-router";
-import { usePathname } from "expo-router"; // Importe usePathname
+import { usePathname } from "expo-router";
 import { View } from "react-native";
-import BottomNavigation from "./components/Navegação"; // Importando a barra de navegação
+import BottomNavigation from "./components/Navegação";
 
 export default function Layout() {
-  const pathname = usePathname(); // Obtém o pathname da rota atual
+  const pathname = usePathname();
 
   const showBottomNavigation = [
     "/screens/Home",
@@ -16,8 +16,8 @@ export default function Layout() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Slot /> {/* Renderiza as rotas filhas aqui */}
-      {showBottomNavigation && <BottomNavigation />} {/* Exibe a BottomNavigation apenas nas telas definidas */}
+      <Slot />
+      {showBottomNavigation && <BottomNavigation />}
     </View>
   );
 }

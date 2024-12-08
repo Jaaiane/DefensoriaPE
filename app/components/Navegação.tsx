@@ -22,7 +22,7 @@ const BottomNavigation: React.FC = () => {
   const segments = useSegments(); 
 
   // Determina qual item está ativo com base no segmento
-  const activeRoute = `/${segments[0]}`; // Primeiro segmento é a rota principal
+  const activeRoute = `/${segments[0]}`; 
 
   return (
     <View style={styles.container}>
